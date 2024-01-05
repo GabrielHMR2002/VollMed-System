@@ -2,6 +2,7 @@ package com.vollmed.project.entities;
 
 import com.vollmed.project.entities.enums.Specialty;
 import com.vollmed.project.entities.records.RequestDoctor;
+import com.vollmed.project.entities.records.RequestUpdateDoctor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -33,13 +34,20 @@ public class Doctor {
     private Address address;
 
 
-
     public Doctor(RequestDoctor dataDoctor) {
         this.name = dataDoctor.name();
         this.email = dataDoctor.email();
         this.crm = dataDoctor.crm();
         this.phone = dataDoctor.phone();
         this.address = dataDoctor.address();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -88,5 +96,21 @@ public class Doctor {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public void updateData(RequestUpdateDoctor data) {
+        if (data.name()!=null){
+            this.name = data.name();
+
+        }
+        if (data.phone()!=null){
+            this.phone = data.phone();
+
+        }
+
+        if (data.address() !=null){
+            this.address.updateAddress(data.address());
+
+        }
     }
 }

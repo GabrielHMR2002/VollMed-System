@@ -30,4 +30,37 @@ public class Address {
     }
 
 
+    public void updateAddress(RequestAddress dataAddress) {
+
+        if (dataAddress.street() != null) {
+            this.street = dataAddress.street();
+        }
+
+        if (dataAddress.neighborhood() != null) {
+            this.neighborhood = dataAddress.neighborhood();
+        }
+
+        if (dataAddress.postalCode() != null) {
+            this.postalCode = dataAddress.postalCode();
+        }
+
+        if (dataAddress.number() != null) {
+            this.number = dataAddress.number();
+        }
+
+        if (dataAddress.complement() != null) {
+            this.complement = dataAddress.complement();
+        }
+
+        if (dataAddress.city() != null) {
+            this.city = dataAddress.city();
+        }
+
+        if (dataAddress.state() != null) {
+            this.state = dataAddress.state();
+        }
+
+
+
+    }
 }
