@@ -1,5 +1,24 @@
 package com.vollmed.project.entities.records;
 
-public record RequestAddress(String street, String neighborhood, String postalCode, String city, String state, String complement, String number) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
+public record RequestAddress(
+        @NotBlank
+        String street,
+        @NotBlank
+        String neighborhood,
+        @NotBlank
+        @Pattern(regexp = "//d{8}")
+        String postalCode,
+
+        @NotBlank
+        String city,
+        @NotBlank
+        String state,
+
+        String complement,
+
+        String number) {
 }
 

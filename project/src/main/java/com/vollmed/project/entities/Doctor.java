@@ -1,14 +1,16 @@
 package com.vollmed.project.entities;
 
 import com.vollmed.project.entities.enums.Specialty;
+import com.vollmed.project.entities.records.RequestDoctor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "tb_doctor")
+
 @Entity(name = "Doctor")
+@Table
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +20,7 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
+    private String name;
     private String email;
     private String crm;
 
@@ -28,4 +30,11 @@ public class Doctor {
     @Embedded
     private Address address;
 
+
+    public Doctor(RequestDoctor dataDoctor) {
+        this.name = dataDoctor.name();
+        this.email = dataDoctor.email();
+        this.crm = dataDoctor.crm();
+        this.address = dataDoctor.address();
+    }
 }
