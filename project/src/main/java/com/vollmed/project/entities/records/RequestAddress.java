@@ -9,7 +9,7 @@ public record RequestAddress(
         @NotBlank
         String neighborhood,
         @NotBlank
-        @Pattern(regexp = "//d{8}")
+        @Pattern(regexp = "\\d{8}")
         String postalCode,
 
         @NotBlank
