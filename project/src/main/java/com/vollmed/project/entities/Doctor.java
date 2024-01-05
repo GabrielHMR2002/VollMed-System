@@ -1,5 +1,6 @@
 package com.vollmed.project.entities;
 
+import com.vollmed.project.entities.enums.Specialty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
