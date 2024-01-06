@@ -12,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/doctor")
@@ -22,30 +23,29 @@ public class DoctorController {
 
     @PostMapping
     @Transactional // transação ativa com o banco de dados pois é um insert/ método de escrita
-    public void registerDoctor(@RequestBody @Valid RequestDoctor dataDoctor){
+    public void registerDoctor(@RequestBody @Valid RequestDoctor dataDoctor) {
         doctorRepository.save(new Doctor(dataDoctor));
     }
 
     @GetMapping
-    public List<RequestDataDoctor> findAll(){
-
-        return doctorRepository.findAll().stream().map(RequestDataDoctor::new).toList();
+    public List<RequestDataDoctor> findAllActiveDoctors() {
+        return doctorRepository.findAllActiveDoctors().stream()
+                .map(RequestDataDoctor::new)
+                .collect(Collectors.toList());
     }
 
     @PutMapping
     @Transactional
-    public void updateData(@RequestBody @Valid RequestUpdateDoctor data){
+    public void updateData(@RequestBody @Valid RequestUpdateDoctor data) {
         var Doctor = doctorRepository.getReferenceById(data.id());
         Doctor.updateData(data);
     }
+
     @DeleteMapping(value = "/{id}")
     @Transactional
-    public void deleteDoctor(@PathVariable Long id){
-        doctorRepository.deleteById(id);
+    public void deleteDoctor(@PathVariable Long id) {
+        var doctor = doctorRepository.getReferenceById(id);
+        doctor.status();
 
     }
-
-
-
-
 }

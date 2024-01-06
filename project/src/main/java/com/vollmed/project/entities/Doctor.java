@@ -23,9 +23,12 @@ public class Doctor {
     private Long id;
     private String name;
     private String email;
-
     private String phone;
     private String crm;
+
+    @Column(name = "active", columnDefinition = "boolean")
+    private boolean active;
+
 
     @Enumerated(EnumType.STRING)
     private Specialty specialty;
@@ -35,6 +38,7 @@ public class Doctor {
 
 
     public Doctor(RequestDoctor dataDoctor) {
+        this.active = true;
         this.name = dataDoctor.name();
         this.email = dataDoctor.email();
         this.crm = dataDoctor.crm();
@@ -112,5 +116,9 @@ public class Doctor {
             this.address.updateAddress(data.address());
 
         }
+    }
+
+    public void status() {
+        this.active = false;
     }
 }
