@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -57,9 +58,15 @@ public class DoctorController {
 
     @DeleteMapping(value = "/{id}")
     @Transactional
-    public ResponseEntity deleteDoctor(@PathVariable Long id) {
+    public ResponseEntity deleteDoctorById(@PathVariable Long id) {
         var doctor = doctorRepository.getReferenceById(id);
         doctor.status();
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Doctor> getDoctorById(@PathVariable Long id) {
+        Optional<Doctor> doctor = doctorRepository.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(doctor.get());
     }
 }
