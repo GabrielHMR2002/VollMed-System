@@ -65,8 +65,12 @@ public class DoctorController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Doctor> getDoctorById(@PathVariable Long id) {
+    public ResponseEntity<Object> getDoctorById(@PathVariable Long id) {
         Optional<Doctor> doctor = doctorRepository.findById(id);
+
+        if(doctor.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found");
+        }
         return ResponseEntity.status(HttpStatus.OK).body(doctor.get());
     }
 }
