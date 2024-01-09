@@ -1,4 +1,4 @@
-package com.vollmed.project.entities.infra;
+package com.vollmed.project.entities.infra.exception;
 
 
 import jakarta.persistence.EntityNotFoundException;
